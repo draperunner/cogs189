@@ -1,0 +1,15 @@
+{
+  "name": "cogs189",
+  "version": "0.0.0",
+  "description": "Project in the course COGS 189 Brain Computer Interfaces",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mats Byrkjeland <matsbyr@gmail.com> (http://byrkje.land)",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "path": "^0.12.7"
+  }
+}
