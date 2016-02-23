@@ -12,13 +12,15 @@ var playState = {
         this.createWorld();
 
         // Wabbit
-
         var result = this.findObjectsByGID(4, this.map, 'Object Layer 1');
         this.wabbit = game.add.sprite(result[0].x, result[0].y, 'wabbit');
         this.wabbit.anchor.setTo(0.5, 1);
         game.physics.arcade.enable(this.wabbit);
         this.wabbit.body.gravity.y = 500;
         this.wabbit.body.collideWorldBounds = true;
+
+        this.horizontalSpeed = 300;
+        this.jumpSpeed = 100;
 
         // Create burgers
         this.burgers = game.add.group();
@@ -42,16 +44,16 @@ var playState = {
 
     movePlayer: function() {
         if (this.cursor.left.isDown) {
-            this.wabbit.body.velocity.x = -300;
+            this.wabbit.body.velocity.x = -1 * this.horizontalSpeed;
         }
         else if (this.cursor.right.isDown) {
-            this.wabbit.body.velocity.x = 300;
+            this.wabbit.body.velocity.x = this.horizontalSpeed;
         }
         else {
             this.wabbit.body.velocity.x = 0;
         }
-        if (this.cursor.up.isDown && this.wabbit.body.onFloor()) {
-            this.wabbit.body.velocity.y = -500;
+        if (this.cursor.up.isDown) {
+            this.wabbit.body.velocity.y = -1 * this.jumpSpeed;
         }
     },
 
