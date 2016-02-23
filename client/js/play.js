@@ -67,7 +67,7 @@ var playState = {
         wabbit.body.gravity.y += 150;
         numberOfBurgers -= 1 ;
         if (numberOfBurgers <= 0) {
-            if (game.global.level < 3) {
+            if (game.global.level < game.global.numLevels) {
                 game.global.level += 1;
                 game.state.start('play');
             }

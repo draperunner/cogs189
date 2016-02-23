@@ -19,6 +19,7 @@ var loadState = {
         game.load.tilemap('lvl1', 'lvl/lvl1.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.tilemap('lvl2', 'lvl/lvl2.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.tilemap('lvl3', 'lvl/lvl3.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('lvl4', 'lvl/lvl4.json', null, Phaser.Tilemap.TILED_JSON);
 
     },
 

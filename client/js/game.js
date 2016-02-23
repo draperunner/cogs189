@@ -6,7 +6,8 @@ game.global = {
     sound: true,
     score: 0,
     resets: 0,
-    level: 1
+    level: 1,
+    numLevels: 4
 };
 
 // Define states
