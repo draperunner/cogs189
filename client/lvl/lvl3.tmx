@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="20" tileheight="20" backgroundcolor="#1a90ff" nextobjectid="4">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="20" tileheight="20" backgroundcolor="#029aff" nextobjectid="5">
  <tileset firstgid="1" name="tileset" tilewidth="20" tileheight="20">
   <image source="../assets/tileset.png" width="100" height="20"/>
  </tileset>
  <layer name="Tile Layer 1" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt1sEKgCAQBmENev9X7tKCSMGC1A4yH/wHO81Ja02SpP/1xCpl+iobj3vRMZ/jW2VbZvY9s28NuS2Q2wK5TXsjv8Hzu/s2wj8C+R6kdo3IbV854bsA7/YBsg==
+   eJztllEOgDAIQ6f3P7TxAFA7SmCRl/TT7QEZca1hGIZ6LiOVWE5dHN+7b5CoX7Ru5Kfw8WpHrhl+6ExmRmo/1g3dc7JfhD/4ee9LQdfesZ7st2qibzDbDzkyOzoT9S5To/TL+p9R+Hl7J+rJeHk9QrPYcbTOZmphwvTy60yYHu14RmZSkc5up+cBU2EDXA==
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object id="1" gid="3" x="220" y="200"/>
-  <object id="2" gid="3" x="580" y="200"/>
-  <object id="3" gid="4" x="400" y="200"/>
+  <object id="1" gid="3" x="600" y="520"/>
+  <object id="2" gid="3" x="740" y="180"/>
+  <object id="3" gid="3" x="320" y="140"/>
+  <object id="4" gid="4" x="360" y="440"/>
  </objectgroup>
 </map>
