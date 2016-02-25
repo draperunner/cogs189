@@ -9,6 +9,7 @@
   "author": "Mats Byrkjeland <matsbyr@gmail.com> (http://byrkje.land)",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "node-thinkgear-sockets": "0.0.1"
   }
 }
