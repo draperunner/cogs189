@@ -7,6 +7,15 @@ var playState = {
         // Keyboard
         this.cursor = game.input.keyboard.createCursorKeys();
         this.r = game.input.keyboard.addKey(Phaser.Keyboard.R);
+        this.d = game.input.keyboard.addKey(Phaser.Keyboard.D);
+
+        // Toggle debug mode when d key is pressed
+        this.d.onDown.add(function () {
+            this.debugAttention.visible = this.debug;
+            this.debugMeditation.visible = this.debug;
+            this.debugBlink.visible = this.debug;
+            this.debugPoorSignalLevel.visible = this.debug;
+        }, this);
 
         // Level
         this.createWorld();
@@ -31,6 +40,12 @@ var playState = {
         // Create lava (deadly tiles)
         this.map.setTileIndexCallback(5, this.reset, this);
 
+        // Neurosky debug texts
+        this.debugAttention = game.add.text(10, 10, 'A: ' + neurosky.attention, { font: '18px Arial', fill: '#ffffff' });
+        this.debugMeditation = game.add.text(10, 30, 'M: ' + neurosky.meditation, { font: '18px Arial', fill: '#ffffff' });
+        this.debugBlink = game.add.text(10, 50, 'B: ' + neurosky.blink, { font: '18px Arial', fill: '#ffffff' });
+        this.debugPoorSignalLevel = game.add.text(10, 70, 'S: ' + neurosky.poorSignalLevel, { font: '18px Arial', fill: '#ffffff' });
+
     },
 
     update: function() {
@@ -40,6 +55,8 @@ var playState = {
         if (this.r.isDown) {
             this.reset();
         }
+        this.updateDebugTexts();
+
     },
 
     movePlayer: function() {
@@ -96,5 +113,12 @@ var playState = {
             }
         });
         return result;
+    },
+
+    updateDebugTexts: function () {
+        this.debugAttention.setText('A: ' + neurosky.attention);
+        this.debugMeditation.setText('M: ' + neurosky.meditation);
+        this.debugBlink.setText('B: ' + neurosky.blink);
+        this.debugPoorSignalLevel.setText('S: ' + neurosky.poorSignalLevel);
     }
 };
