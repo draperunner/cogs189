@@ -32,6 +32,9 @@ var playState = {
         this.horizontalSpeed = 300;
         this.jumpSpeed = 100;
 
+        // Settings for neurosky
+        this.flyThreshold = 30;
+
         // Create burgers
         this.burgers = game.add.group();
         this.burgers.enableBody = true;
@@ -72,7 +75,10 @@ var playState = {
         else {
             this.wabbit.body.velocity.x = 0;
         }
-        if (this.cursor.up.isDown) {
+        if (this.cursor.up.isDown && this.wabbit.body.onFloor()) {
+            this.wabbit.body.velocity.y = -1 * this.jumpSpeed * 2;
+        }
+        if (neurosky.attention > this.flyThreshold) {
             this.wabbit.body.velocity.y = -1 * this.jumpSpeed;
         }
     },
