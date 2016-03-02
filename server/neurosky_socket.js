@@ -27,6 +27,10 @@ ThinkGearClient.prototype.connect = function() {
 		client.write(JSON.stringify(self.config));
 	});
 
+	client.on('error', function(error) {
+		self.emit('error', error);
+	});
+
 	client.on('data',function(data){
     try {
       var json = JSON.parse(data.toString());
