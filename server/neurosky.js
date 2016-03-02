@@ -18,6 +18,11 @@ client.on('data', function(data){
 		connected = !connected;
 	}
 });
+
+client.on('error', function(error) {
+	console.log('[Neurosky] Unable to connect: ', error.code);
+})
+
 // initiate connection
 client.connect();
 /** END connect to neurosky **/
