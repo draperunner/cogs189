@@ -3,14 +3,20 @@ var thinkgear = require('node-thinkgear-sockets');
 
 var client = thinkgear.createClient({ enableRawOutput: true });
 
+var connected = false;
+
 // bind receive data event
-client.on('data',function(data){
+client.on('data', function(data){
 	// if websocket server is running
-	if(wss){
+	if (wss) {
 		// broadcast this latest data packet to all connected clients
 		wss.broadcast(data);
 	}
-	console.log(data);
+
+	if (!connected) {
+		console.log('[Neurosky] Connection established');
+		connected = !connected;
+	}
 });
 // initiate connection
 client.connect();
@@ -30,8 +36,13 @@ wss.broadcast = function(data) {
 // bind each connection
 wss.on('connection', function(ws) {
     ws.on('message', function(message) {
-        console.log('[CLIENT] %s', message);
+        console.log('[Websocket][CLIENT] %s', message);
     });
-    ws.send('You are connected to Mindwave Mobile');
+		console.log('[Websocket] Listening on port 8080');
 });
 /** END start our websocket server **/
+
+module.exports = {
+	client: client,
+	wss: wss
+};

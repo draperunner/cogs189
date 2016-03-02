@@ -4,7 +4,8 @@
   "description": "Project in the course COGS 189 Brain Computer Interfaces",
   "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js"
   },
   "author": "Mats Byrkjeland <matsbyr@gmail.com> (http://byrkje.land)",
   "license": "ISC",
