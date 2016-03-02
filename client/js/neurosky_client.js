@@ -42,7 +42,7 @@ if ("WebSocket" in window) {
     if (data.poorSignalLevel != null) {
       neurosky.poorSignalLevel = parseInt(data.poorSignalLevel);
     }
-    // console.log('A', neurosky.attention, 'M', neurosky.meditation);
+    //  console.log('A', neurosky.attention, 'M', neurosky.meditation);
   };
 
   // when websocket closes connection, do this stuff
