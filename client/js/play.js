@@ -11,6 +11,7 @@ var playState = {
 
         // Toggle debug mode when d key is pressed
         this.d.onDown.add(function () {
+            this.debug = !this.debug;
             this.debugAttention.visible = this.debug;
             this.debugMeditation.visible = this.debug;
             this.debugBlink.visible = this.debug;
@@ -39,6 +40,8 @@ var playState = {
 
         // Create lava (deadly tiles)
         this.map.setTileIndexCallback(5, this.reset, this);
+
+        this.debug = true;
 
         // Neurosky debug texts
         this.debugAttention = game.add.text(10, 10, 'A: ' + neurosky.attention, { font: '18px Arial', fill: '#ffffff' });
