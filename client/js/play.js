@@ -75,14 +75,30 @@ var playState = {
         else {
             this.wabbit.body.velocity.x = 0;
         }
+
+        // Classic jump
         if (this.cursor.up.isDown && this.wabbit.body.onFloor()) {
             this.wabbit.body.velocity.y = -1 * this.jumpSpeed * 2;
         }
+
+        // Blink jump
         // if (neurosky.blink > 30) {
         //     this.wabbit.body.velocity.y = -1 * this.jumpSpeed * 2;
         // }
+
+        // Attention fly
         if (neurosky.attention > this.flyThreshold) {
             this.wabbit.body.velocity.y = -1 * this.jumpSpeed;
+        }
+
+        // Debug mode
+        if (this.debug) {
+          if (this.cursor.up.isDown) {
+              this.wabbit.body.velocity.y = -1 * this.jumpSpeed;
+          }
+          if (this.cursor.down.isDown) {
+              this.wabbit.body.velocity.y = this.jumpSpeed;
+          }
         }
     },
 
