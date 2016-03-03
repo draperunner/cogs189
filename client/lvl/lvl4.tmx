@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="20" tileheight="20" backgroundcolor="#1a90ff" nextobjectid="9">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="20" tileheight="20" backgroundcolor="#1a90ff" nextobjectid="12">
  <tileset firstgid="1" name="tileset" tilewidth="20" tileheight="20" tilecount="30" columns="15">
   <image source="../assets/finalTileset.png" width="300" height="40"/>
  </tileset>
@@ -9,8 +9,8 @@
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object id="4" gid="21" x="400" y="220" width="20" height="20"/>
-  <object id="5" gid="22" x="260" y="220" width="20" height="20"/>
-  <object id="7" gid="22" x="580" y="220" width="20" height="20"/>
+  <object id="9" gid="21" x="420" y="220" width="20" height="20"/>
+  <object id="10" gid="22" x="580" y="220" width="20" height="20"/>
+  <object id="11" gid="22" x="240" y="220" width="20" height="20"/>
  </objectgroup>
 </map>

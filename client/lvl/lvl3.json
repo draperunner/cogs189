@@ -20,25 +20,9 @@
          "name":"Object Layer 1",
          "objects":[
                 {
-                 "gid":23,
-                 "height":20,
-                 "id":5,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":20,
-                 "x":100,
-                 "y":540
-                }, 
-                {
                  "gid":21,
                  "height":20,
-                 "id":7,
+                 "id":9,
                  "name":"",
                  "properties":
                     {
@@ -52,9 +36,9 @@
                  "y":520
                 }, 
                 {
-                 "gid":22,
+                 "gid":23,
                  "height":20,
-                 "id":8,
+                 "id":10,
                  "name":"",
                  "properties":
                     {
@@ -64,7 +48,23 @@
                  "type":"",
                  "visible":true,
                  "width":20,
-                 "x":720,
+                 "x":100,
+                 "y":540
+                }, 
+                {
+                 "gid":22,
+                 "height":20,
+                 "id":11,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":20,
+                 "x":660,
                  "y":120
                 }],
          "opacity":1,
@@ -74,7 +74,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":9,
+ "nextobjectid":12,
  "orientation":"orthogonal",
  "properties":
     {
