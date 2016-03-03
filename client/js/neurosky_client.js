@@ -33,7 +33,7 @@ if ("WebSocket" in window) {
     // handle "blinkStrength" data
     if (data.blinkStrength) {
       neurosky.blink = data.blinkStrength;
-      console.log('[blink] ' + neurosky.blink);
+      //console.log('[blink] ' + neurosky.blink);
     } else {
       neurosky.blink = 0;
     }
