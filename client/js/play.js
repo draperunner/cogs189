@@ -78,6 +78,9 @@ var playState = {
         if (this.cursor.up.isDown && this.wabbit.body.onFloor()) {
             this.wabbit.body.velocity.y = -1 * this.jumpSpeed * 2;
         }
+        // if (neurosky.blink > 30) {
+        //     this.wabbit.body.velocity.y = -1 * this.jumpSpeed * 2;
+        // }
         if (neurosky.attention > this.flyThreshold) {
             this.wabbit.body.velocity.y = -1 * this.jumpSpeed;
         }

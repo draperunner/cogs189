@@ -19,6 +19,15 @@ client.on('data', function(data){
 	}
 });
 
+// bind receive data event
+client.on('blink_data', function(data){
+	// if websocket server is running
+	if (wss) {
+		// broadcast this latest data packet to all connected clients
+		wss.broadcast(data);
+	}
+});
+
 client.on('error', function(error) {
 	console.log('[Neurosky] Unable to connect: ', error.code);
 });
