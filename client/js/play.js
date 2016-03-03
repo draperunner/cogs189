@@ -111,6 +111,8 @@ var playState = {
     createWorld: function() {
         this.map = game.add.tilemap('lvl' + game.global.level);
         this.map.addTilesetImage('tileset');
+        this.map.addTilesetImage('tileset_2');
+        this.map.addTilesetImage('rsz_tiles_32x32');
         this.layer = this.map.createLayer('Tile Layer 1');
         this.layer.resizeWorld();
         this.map.setCollision([1, 2]);
