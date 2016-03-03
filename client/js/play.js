@@ -60,44 +60,19 @@ var playState = {
             this.reset();
         }
         this.updateDebugTexts();
-
     },
 
     movePlayer: function() {
-
-        if (this.cursor.left.isDown) {
-            this.wabbit.body.velocity.x = -1 * this.horizontalSpeed;
-        } else if (this.cursor.right.isDown) {
-            this.wabbit.body.velocity.x = this.horizontalSpeed;
-        } else {
-            this.wabbit.body.velocity.x = 0;
-        }
-
         if (game.global.debug) {
-            if (this.cursor.up.isDown) {
-              this.wabbit.body.velocity.y = -2 * this.jumpSpeed;
-            } else if (this.cursor.down.isDown) {
-              this.wabbit.body.velocity.y = 2 * this.jumpSpeed;
-            } else {
-              this.wabbit.body.velocity.y = 0;
-            }
-
+            rules.methods.godModeMove.bind(this)();
             return;
         }
-
-        // Classic jump
-        if (this.cursor.up.isDown && this.wabbit.body.onFloor()) {
-            this.wabbit.body.velocity.y = -1 * this.jumpSpeed * 2;
-        }
-
-        // Blink jump
-        // if (neurosky.blink > 30) {
-        //     this.wabbit.body.velocity.y = -1 * this.jumpSpeed * 2;
-        // }
-
-        // Attention fly
-        if (neurosky.attention > this.flyThreshold) {
-            this.wabbit.body.velocity.y = -1 * this.jumpSpeed;
+        if (rules.hasOwnProperty('lvl' + game.global.level)) {
+            rules['lvl' + game.global.level].move.bind(this)();
+            rules['lvl' + game.global.level].jump.bind(this)();
+        } else {
+            rules['defaults'].move.bind(this)();
+            rules['defaults'].jump.bind(this)();
         }
     },
 
@@ -132,6 +107,7 @@ var playState = {
         this.layer.resizeWorld();
         this.map.setCollision([1, 2]);
     },
+
     // Find objects in a Tiled layer that contain a property called "type" equal to a certain value
     findObjectsByGID: function(gid, map, layer) {
         var result = [];
