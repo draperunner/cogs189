@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="20" tileheight="20" backgroundcolor="#00aeef" nextobjectid="24">
- <tileset firstgid="1" name="tileset" tilewidth="20" tileheight="20" tilecount="17" columns="5">
-  <image source="../assets/tileset.png" width="100" height="20"/>
- </tileset>
- <tileset firstgid="18" name="object" tilewidth="20" tileheight="20" tilecount="5" columns="5">
-  <image source="../assets/tileset.png" width="100" height="20"/>
- </tileset>
- <tileset firstgid="23" name="tileset_2" tilewidth="20" tileheight="20" tilecount="30" columns="15">
-  <image source="../assets/tileset_2.jpg" width="300" height="40"/>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="20" tileheight="20" backgroundcolor="#00aeef" nextobjectid="35">
+ <tileset firstgid="1" name="tileset" tilewidth="20" tileheight="20" tilecount="30" columns="15">
+  <image source="../assets/finalTileset.png" width="300" height="40"/>
  </tileset>
  <layer name="Tile Layer 1" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlskKwzAMRN0l6ZZu//+zlWgGpkZOerGUgx4MhbiQF9kSLiVJkiRJki0wSe6Sp+S08BvFS/KYHTgHyTHQi7EctW7vSKmZnWSQ7Muv3zlSimjtL/tdJFfJzd3uy1iW/fANUTWta2idPf2G2k/r6lVT1LDVF7pe9/RkPOvF2h5iXX0GcrLq2gt+l9UTfA7g6TmHsIeYN3g3nzN29J6RdZ+wK+8hzmpEP6/NQ53nXFvg2cutedNyU6z+9nK0zmTNuLDWi3/mNv834j4Bx63cZyxwh+3NB7yABnc=
+   eJztlt0OwjAIRnG6+e/c+7+sECV+NnTVi4IXnISbdUnPvkKVKEmSJEmSf+DIdWrUOcyO6M5149oXNXMtr/UlzO6J5TiHGr3ZcI1cA336HSKlgNr5op/2aFQfTrTup98QlWmZoc4GIt9Q+kmuXplqhpabrm+5dvDsYjzrResMdV18RnCycu0F7mXNBPaBetby7uWn+w6wN/YZOnq6lXtjRuKKZ6i9GjHPrftQ7nPMVvGc5dp9U3MTrPn2crR6smRaWevFN/c2vhvxP0cdvbP5BfmduDrs8wDhowaT
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object id="16" gid="21" x="290" y="432" width="20" height="20"/>
-  <object id="17" gid="20" x="460" y="480" width="20" height="20"/>
-  <object id="18" gid="20" x="321" y="308" width="20" height="20"/>
-  <object id="19" gid="20" x="347" y="293" width="20" height="20"/>
-  <object id="20" gid="20" x="375" y="284" width="20" height="20"/>
-  <object id="21" gid="20" x="397" y="306" width="20" height="20"/>
-  <object id="22" gid="20" x="411" y="339" width="20" height="20"/>
-  <object id="23" gid="20" x="103" y="295" width="20" height="20"/>
+  <object id="24" gid="21" x="179" y="240" width="20" height="20"/>
+  <object id="28" gid="22" x="320" y="280" width="20" height="20"/>
+  <object id="29" gid="22" x="360" y="260" width="20" height="20"/>
+  <object id="30" gid="22" x="400" y="280" width="20" height="20"/>
+  <object id="31" gid="22" x="420" y="320" width="20" height="20"/>
+  <object id="32" gid="22" x="420" y="360" width="20" height="20"/>
+  <object id="33" gid="22" x="480" y="480" width="20" height="20"/>
+  <object id="34" gid="22" x="240" y="420" width="20" height="20"/>
  </objectgroup>
 </map>
