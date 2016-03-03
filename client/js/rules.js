@@ -43,6 +43,12 @@ rules = {
             } else {
                 this.wabbit.body.velocity.y = 0;
             }
+        },
+        moveMovable: function () {
+            var target = 4 * neurosky.attention + 110;
+            var elevator = this.movables.getTop();
+            var distance = target - elevator.y;
+            elevator.body.velocity.y = (Math.abs(distance) < 5) ? 0 : Math.sign(distance) * 30;
         }
     },
     defaults: {
@@ -50,6 +56,8 @@ rules = {
             rules.methods.classicHorizontalMove.bind(this)();
             rules.methods.attentionFly();
         },
-        jump: function () { rules.methods.classicJump.bind(this)() }
+        jump: function () { rules.methods.classicJump.bind(this)() },
+        movableObject: 'elevator',
+        moveMovable: function () { rules.methods.moveMovable.bind(this)() }
     }
 };

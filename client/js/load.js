@@ -14,6 +14,8 @@ var loadState = {
         game.load.spritesheet('mute', 'assets/muteButton.png', 28, 22);
         game.load.image('wabbit', 'assets/wabbit.png');
         game.load.image('burger', 'assets/burger.png');
+        game.load.image('elevator', 'assets/elevator.png');
+        game.load.image('stone', 'assets/stone.png');
 
         game.load.image('tileset', 'assets/finalTileset.png');
         game.load.tilemap('lvl1', 'lvl/lvl1.json', null, Phaser.Tilemap.TILED_JSON);

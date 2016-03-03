@@ -5,7 +5,7 @@
  </tileset>
  <layer name="Tile Layer 1" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlt0OgyAMhXvlz2Y2zXaJ7/+agzgS7EBaBEoWm5zoBZqPA2lPDwD9pWx6ai1as/DzEeAboI0ynD7GVvhMdbAxKa31+/4WJdqX5XOF+Uatm6BifC/PGklhPuyxexeoSvmGyteKf3aPMf9K+MP5HvOV7rdnzzdXhfptK3w+xpR7Ubo/n/WxxvyIMR75Wmu+UX3ErDXnb8pZ184HXEaJ/MJhlMpXFEYlyGeKMkv/kc/NsPdCfKH8QmWzPUrBPv9yeClZjpvvj+any0rhnODXrxjf5FnDEfYzda+h/+XK5Zdk9AEMXRtb
+   eJztlt0OgyAMhXs13Wac+7lk7/+ag2wk6Ci0CC0XNjnRCzCfB9KeAQCGQ9V0s7pbLcrPGeEboY9ynDHGXvhcneDLZKzev/eXKtG6PF8ojO9sdVEQle8ZWashjC92F6gq2cPl0/bP/2POvxb+cPZjfAuU99oH4P221vnuLazf9sIXYyy5F637814fJeZHjjHlq9R8o/q4ZZWcvyVnLZ0PuIwa+YXDqJWvKIxGkc9VaoZq++eqFV+YXa+N+HL5Jcfme5SBdf7l8FIyHDffp+ZnyErhnODfLyrfFFlL0dbPlChZAfterXx+SFYfLX8a0w==
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
