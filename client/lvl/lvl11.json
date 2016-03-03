@@ -162,9 +162,10 @@
  "tileheight":20,
  "tilesets":[
         {
+         "columns":15,
          "firstgid":1,
          "image":"..\/assets\/finalTileset.png",
-         "imageheight":40,
+         "imageheight":60,
          "imagewidth":300,
          "margin":0,
          "name":"tileset",
@@ -173,6 +174,7 @@
 
             },
          "spacing":0,
+         "tilecount":45,
          "tileheight":20,
          "tilewidth":20
         }],
