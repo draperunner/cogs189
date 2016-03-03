@@ -59,5 +59,24 @@ rules = {
         jump: function () { rules.methods.classicJump.bind(this)() },
         movableObject: 'elevator',
         moveMovable: function () { rules.methods.moveMovable.bind(this)() }
+    },
+    lvl2: {
+        move: function () {
+            rules.methods.classicHorizontalMove.bind(this)();
+            rules.methods.attentionFly();
+        },
+        jump: function () { rules.methods.classicJump.bind(this)() },
+        movableObject: 'stone',
+        moveMovable: function () {
+            var stone = this.movables.getTop();
+            var target = 180 - neurosky.attention * 2;
+            var distance = target - stone.y;
+            stone.body.velocity.y = (Math.abs(distance) < 5) ? 0 : Math.sign(distance) * 30;
+        },
+        overlapMovable: function () {
+            if (this.movables.getTop() && this.movables.getTop().body.velocity.y > 0) {
+                this.reset();
+            }
+        }
     }
 };

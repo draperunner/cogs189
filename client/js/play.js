@@ -55,16 +55,19 @@ var playState = {
             rules['defaults'].movableObject;
         this.map.createFromObjects('Object Layer 1', 23, img, 0, true, false, this.movables);
         this.movables.forEach(function(movable) {
+            if (img === 'stone') {
+                movable.anchor.x = 0.5;
+            }
             movable.body.immovable = true;
             movable.body.allowGravity = false;
             movable.body.collideWorldBounds = true;
         }, this);
+
         // Neurosky debug texts
         this.debugAttention = game.add.text(10, 10, 'A: ' + neurosky.attention, { font: '18px Arial', fill: '#ffffff' });
         this.debugMeditation = game.add.text(10, 30, 'M: ' + neurosky.meditation, { font: '18px Arial', fill: '#ffffff' });
         this.debugBlink = game.add.text(10, 50, 'B: ' + neurosky.blink, { font: '18px Arial', fill: '#ffffff' });
         this.debugPoorSignalLevel = game.add.text(10, 70, 'S: ' + neurosky.poorSignalLevel, { font: '18px Arial', fill: '#ffffff' });
-
     },
 
     update: function() {
@@ -72,6 +75,10 @@ var playState = {
         game.physics.arcade.collide(this.wabbit, this.movables);
         game.physics.arcade.collide(this.layer, this.movables);
         game.physics.arcade.overlap(this.wabbit, this.burgers, this.eatBurger, null, this);
+
+        if (rules.hasOwnProperty('lvl' + game.global.level)) {
+            game.physics.arcade.overlap(this.wabbit, this.movables, rules['lvl' + game.global.level].overlapMovable.bind(this)(), null, this);
+        }
         this.movePlayer();
         this.moveMovable();
         if (this.r.isDown) {
