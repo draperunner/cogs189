@@ -7,7 +7,7 @@ game.global = {
     score: 0,
     resets: 0,
     level: 1,
-    numLevels: 5
+    numLevels: 11
 };
 
 // Define states
