@@ -11,18 +11,20 @@ var playState = {
 
         // Toggle debug mode when d key is pressed
         this.d.onDown.add(function () {
-            this.debugAttention.visible = !this.debugAttention.visible
+            this.debugAttention.visible = !this.debugAttention.visible;
             this.debugMeditation.visible = !this.debugMeditation.visible;
             this.debugBlink.visible = !this.debugBlink.visible;
             this.debugPoorSignalLevel.visible = !this.debugPoorSignalLevel.visible;
         }, this);
 
+
         // Level
         this.createWorld();
 
         // Wabbit
-        var result = this.findObjectsByGID(4, this.map, 'Object Layer 1');
+        var result = this.findObjectsByGID(21, this.map, 'Object Layer 1');
         this.wabbit = game.add.sprite(result[0].x, result[0].y, 'wabbit');
+
         this.wabbit.anchor.setTo(0.5, 1);
         game.physics.arcade.enable(this.wabbit);
 
@@ -38,11 +40,12 @@ var playState = {
         // Create burgers
         this.burgers = game.add.group();
         this.burgers.enableBody = true;
-        this.map.createFromObjects('Object Layer 1', 3, 'burger', 0, true, false, this.burgers);
+        this.map.createFromObjects('Object Layer 1', 22, 'burger', 0, true, false, this.burgers);
         numberOfBurgers = this.burgers.length;
 
         // Create lava (deadly tiles)
-        this.map.setTileIndexCallback(5, this.reset, this);
+        this.map.setTileIndexCallback(24, this.reset, this);
+        this.map.setTileIndexCallback(26, this.reset, this);
 
         // Neurosky debug texts
         this.debugAttention = game.add.text(10, 10, 'A: ' + neurosky.attention, { font: '18px Arial', fill: '#ffffff' });
@@ -103,7 +106,7 @@ var playState = {
         this.map.addTilesetImage('tileset');
         this.layer = this.map.createLayer('Tile Layer 1');
         this.layer.resizeWorld();
-        this.map.setCollision([1, 2]);
+        this.map.setCollision([2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 19, 20, 24, 26, 27, 28]);
     },
 
     // Find objects in a Tiled layer that contain a property called "type" equal to a certain value
