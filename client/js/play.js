@@ -11,11 +11,10 @@ var playState = {
 
         // Toggle debug mode when d key is pressed
         this.d.onDown.add(function () {
-            this.debug = !this.debug;
-            this.debugAttention.visible = this.debug;
-            this.debugMeditation.visible = this.debug;
-            this.debugBlink.visible = this.debug;
-            this.debugPoorSignalLevel.visible = this.debug;
+            this.debugAttention.visible = !this.debugAttention.visible
+            this.debugMeditation.visible = !this.debugMeditation.visible;
+            this.debugBlink.visible = !this.debugBlink.visible;
+            this.debugPoorSignalLevel.visible = !this.debugPoorSignalLevel.visible;
         }, this);
 
         // Level
@@ -26,7 +25,8 @@ var playState = {
         this.wabbit = game.add.sprite(result[0].x, result[0].y, 'wabbit');
         this.wabbit.anchor.setTo(0.5, 1);
         game.physics.arcade.enable(this.wabbit);
-        this.wabbit.body.gravity.y = 500;
+
+        this.wabbit.body.gravity.y = (!game.global.debug) ? 500 : 0;
         this.wabbit.body.collideWorldBounds = true;
 
         this.horizontalSpeed = 300;
@@ -43,8 +43,6 @@ var playState = {
 
         // Create lava (deadly tiles)
         this.map.setTileIndexCallback(5, this.reset, this);
-
-        this.debug = true;
 
         // Neurosky debug texts
         this.debugAttention = game.add.text(10, 10, 'A: ' + neurosky.attention, { font: '18px Arial', fill: '#ffffff' });
@@ -66,14 +64,25 @@ var playState = {
     },
 
     movePlayer: function() {
+
         if (this.cursor.left.isDown) {
             this.wabbit.body.velocity.x = -1 * this.horizontalSpeed;
-        }
-        else if (this.cursor.right.isDown) {
+        } else if (this.cursor.right.isDown) {
             this.wabbit.body.velocity.x = this.horizontalSpeed;
-        }
-        else {
+        } else {
             this.wabbit.body.velocity.x = 0;
+        }
+
+        if (game.global.debug) {
+            if (this.cursor.up.isDown) {
+              this.wabbit.body.velocity.y = -2 * this.jumpSpeed;
+            } else if (this.cursor.down.isDown) {
+              this.wabbit.body.velocity.y = 2 * this.jumpSpeed;
+            } else {
+              this.wabbit.body.velocity.y = 0;
+            }
+
+            return;
         }
 
         // Classic jump
@@ -89,16 +98,6 @@ var playState = {
         // Attention fly
         if (neurosky.attention > this.flyThreshold) {
             this.wabbit.body.velocity.y = -1 * this.jumpSpeed;
-        }
-
-        // Debug mode
-        if (this.debug) {
-          if (this.cursor.up.isDown) {
-              this.wabbit.body.velocity.y = -1 * this.jumpSpeed;
-          }
-          if (this.cursor.down.isDown) {
-              this.wabbit.body.velocity.y = this.jumpSpeed;
-          }
         }
     },
 
