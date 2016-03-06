@@ -41,7 +41,7 @@ var playState = {
         this.burgers = game.add.group();
         this.burgers.enableBody = true;
         this.map.createFromObjects('Object Layer 1', 22, 'burger', 0, true, false, this.burgers);
-        numberOfBurgers = this.burgers.length;
+        this.numberOfBurgers = this.burgers.length;
 
         // Create lava (deadly tiles)
         this.map.setTileIndexCallback(24, this.reset, this);
@@ -78,9 +78,9 @@ var playState = {
         if (this.r.isDown) {
             this.reset();
         }
+        this.updateDebugTexts();
         if (game.global.debug) {
             rules.methods.godModeMove.bind(this)();
-            this.updateDebugTexts();
             return;
         }
         rules.get(game.global.level, 'move').bind(this)();
@@ -95,18 +95,15 @@ var playState = {
 
     eatBurger: function(wabbit, burger) {
         burger.kill();
-        wabbit.body.gravity.y += 150;
-        numberOfBurgers -= 1 ;
-        if (numberOfBurgers <= 0) {
-            if (game.global.level < game.global.numLevels) {
-                game.global.level += 1;
-                game.state.start('play');
-            }
-            else {
-                game.global.level = 1;
-                game.state.start('menu');
-            }
-
+        this.numberOfBurgers -= 1 ;
+        if (this.numberOfBurgers > 0) { return; }
+        if (game.global.level < game.global.numLevels) {
+            game.global.level += 1;
+            game.state.start('play');
+        }
+        else {
+            game.global.level = 1;
+            game.state.start('menu');
         }
     },
 
