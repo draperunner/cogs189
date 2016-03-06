@@ -10,5 +10,5 @@ A platformer controlled using a NeuroSky headset.
 3. Install: `npm install`
 
 ## How to use
-1. In the cogs189 directory, run `node server/server.js`
+1. In the cogs189 directory, run `npm run start`
 2. Open your browser and go to `localhost:3000`
