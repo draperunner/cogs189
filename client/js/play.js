@@ -75,24 +75,16 @@ var playState = {
         game.physics.arcade.overlap(this.wabbit, this.burgers, this.eatBurger, null, this);
         game.physics.arcade.overlap(this.wabbit, this.movables, rules.get(game.global.level, 'overlapMovable').bind(this)(), null, this);
 
-        this.movePlayer();
-        this.moveMovable();
         if (this.r.isDown) {
             this.reset();
         }
-        this.updateDebugTexts();
-    },
-
-    movePlayer: function() {
         if (game.global.debug) {
             rules.methods.godModeMove.bind(this)();
+            this.updateDebugTexts();
             return;
         }
         rules.get(game.global.level, 'move').bind(this)();
         rules.get(game.global.level, 'jump').bind(this)();
-    },
-
-    moveMovable: function () {
         rules.get(game.global.level, 'moveMovable').bind(this)();
     },
 
