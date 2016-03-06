@@ -1,4 +1,6 @@
 rules = {
+
+    // Some standard methods that might be used multiple places
     methods: {
         classicHorizontalMove: function () {
             // Horizontal movement
@@ -26,15 +28,13 @@ rules = {
                 this.wabbit.body.velocity.y = -1 * this.jumpSpeed;
             }
         },
+        moveAndFly: function () {
+            rules.methods.classicHorizontalMove.bind(this)();
+            rules.methods.attentionFly.bind(this)();
+        },
         godModeMove: function () {
             // Horizontal movement
-            if (this.cursor.left.isDown) {
-                this.wabbit.body.velocity.x = -1 * this.horizontalSpeed;
-            } else if (this.cursor.right.isDown) {
-                this.wabbit.body.velocity.x = this.horizontalSpeed;
-            } else {
-                this.wabbit.body.velocity.x = 0;
-            }
+            rules.methods.classicHorizontalMove.bind(this)();
             // Vertical movement
             if (this.cursor.up.isDown) {
                 this.wabbit.body.velocity.y = -2 * this.jumpSpeed;
@@ -43,31 +43,32 @@ rules = {
             } else {
                 this.wabbit.body.velocity.y = 0;
             }
-        },
-        moveMovable: function () {
-            var target = 4 * neurosky.attention + 110;
-            var elevator = this.movables.getTop();
-            var distance = target - elevator.y;
-            elevator.body.velocity.y = (Math.abs(distance) < 5) ? 0 : Math.sign(distance) * 30;
         }
     },
+
+    // Default behavior for levels that not have been specifically configured.
     defaults: {
-        move: function () {
-            rules.methods.classicHorizontalMove.bind(this)();
-            rules.methods.attentionFly();
-        },
-        jump: function () { rules.methods.classicJump.bind(this)() },
-        movableObject: 'elevator',
-        moveMovable: function () { rules.methods.moveMovable.bind(this)() }
+        move: function () { rules.methods.moveAndFly.bind(this)(); },
+        jump: function () { rules.methods.classicJump.bind(this)(); },
+        movableObject: '',
+        moveMovable: function () {},
+        overlapMovable: function () {}
     },
+
+    // Function that returns requested property for given level. If it doesn't exist, the default is used.
+    get: function (lvlNumber, propertyName) {
+        if (rules.hasOwnProperty('lvl' + lvlNumber) && rules['lvl' + lvlNumber].hasOwnProperty(propertyName)) {
+            return rules['lvl' + lvlNumber][propertyName];
+        }
+        return rules.defaults[propertyName];
+    },
+
+    // (Optional) Specific configuration for each level follows. Object name must start with 'lvl' followed by number of level.
     lvl2: {
-        move: function () {
-            rules.methods.classicHorizontalMove.bind(this)();
-            rules.methods.attentionFly();
-        },
-        jump: function () { rules.methods.classicJump.bind(this)() },
+        move: function () { rules.methods.classicHorizontalMove.bind(this)(); },
         movableObject: 'stone',
         moveMovable: function () {
+            if (this.movables.children.length === 0) return;
             var stone = this.movables.getTop();
             var target = 180 - neurosky.attention * 2;
             var distance = target - stone.y;
@@ -78,5 +79,20 @@ rules = {
                 this.reset();
             }
         }
+    },
+    lvl3: {
+        move: function () { rules.methods.classicHorizontalMove.bind(this)(); },
+        movableObject: 'elevator',
+        moveMovable: function () {
+            if (this.movables.children.length === 0) return;
+            var target = 4 * neurosky.attention + 110;
+            var elevator = this.movables.getTop();
+            var distance = target - elevator.y;
+            elevator.body.velocity.y = (Math.abs(distance) < 5) ? 0 : Math.sign(distance) * 30;
+        }
+    },
+    lvl7: {
+        move: function () { rules.methods.classicHorizontalMove.bind(this)(); },
+        jump: function () { rules.methods.blinkJump.bind(this)(); }
     }
 };

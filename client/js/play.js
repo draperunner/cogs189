@@ -50,9 +50,7 @@ var playState = {
         // Movable objects (elevator, stone, etc.)
         this.movables = game.add.group();
         this.movables.enableBody = true;
-        var img = rules.hasOwnProperty('lvl' + game.global.level) ?
-            rules['lvl' + game.global.level].movableObject :
-            rules['defaults'].movableObject;
+        var img = rules.get(game.global.level, 'movableObject');
         this.map.createFromObjects('Object Layer 1', 23, img, 0, true, false, this.movables);
         this.movables.forEach(function(movable) {
             if (img === 'stone') {
@@ -75,10 +73,8 @@ var playState = {
         game.physics.arcade.collide(this.wabbit, this.movables);
         game.physics.arcade.collide(this.layer, this.movables);
         game.physics.arcade.overlap(this.wabbit, this.burgers, this.eatBurger, null, this);
+        game.physics.arcade.overlap(this.wabbit, this.movables, rules.get(game.global.level, 'overlapMovable').bind(this)(), null, this);
 
-        if (rules.hasOwnProperty('lvl' + game.global.level)) {
-            game.physics.arcade.overlap(this.wabbit, this.movables, rules['lvl' + game.global.level].overlapMovable.bind(this)(), null, this);
-        }
         this.movePlayer();
         this.moveMovable();
         if (this.r.isDown) {
@@ -92,23 +88,12 @@ var playState = {
             rules.methods.godModeMove.bind(this)();
             return;
         }
-        if (rules.hasOwnProperty('lvl' + game.global.level)) {
-            rules['lvl' + game.global.level].move.bind(this)();
-            rules['lvl' + game.global.level].jump.bind(this)();
-        } else {
-            rules['defaults'].move.bind(this)();
-            rules['defaults'].jump.bind(this)();
-        }
+        rules.get(game.global.level, 'move').bind(this)();
+        rules.get(game.global.level, 'jump').bind(this)();
     },
 
     moveMovable: function () {
-        if (this.movables.children.length === 0) return;
-        if (rules.hasOwnProperty('lvl' + game.global.level)) {
-            rules['lvl' + game.global.level].moveMovable.bind(this)();
-        } else {
-            rules['defaults'].moveMovable.bind(this)();
-        }
-
+        rules.get(game.global.level, 'moveMovable').bind(this)();
     },
 
     reset: function() {
