@@ -73,7 +73,7 @@ var playState = {
         game.physics.arcade.collide(this.wabbit, this.movables);
         game.physics.arcade.collide(this.layer, this.movables);
         game.physics.arcade.overlap(this.wabbit, this.burgers, this.eatBurger, null, this);
-        game.physics.arcade.overlap(this.wabbit, this.movables, rules.get(game.global.level, 'overlapMovable').bind(this)(), null, this);
+        rules.get(game.global.level, 'overlapMovable').bind(this)();
 
         if (this.r.isDown) {
             this.reset();

@@ -72,10 +72,19 @@ rules = {
             var stone = this.movables.getTop();
             var target = 180 - neurosky.attention * 2;
             var distance = target - stone.y;
-            stone.body.velocity.y = (Math.abs(distance) < 5) ? 0 : Math.sign(distance) * 30;
+
+            if (Math.sign(distance) === 1) {
+                stone.body.velocity.y = 60;
+            } else {
+                stone.body.velocity.y = Math.sign(distance) * 30;
+            }
         },
         overlapMovable: function () {
-            if (this.movables.getTop() && this.movables.getTop().body.velocity.y > 0) {
+            const stone = this.movables.getTop();
+            if (!stone || stone.body.velocity.y <= 0) return;
+            var boundsA = stone.getBounds();
+            var boundsB = this.wabbit.getBounds();
+            if (Phaser.Rectangle.intersects(boundsA, boundsB) && this.wabbit.body.onFloor()) {
                 this.reset();
             }
         }
