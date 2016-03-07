@@ -13,14 +13,14 @@ rules = {
             }
         },
         classicJump: function () {
-            // Classic jump
             if (this.cursor.up.isDown && this.wabbit.body.onFloor()) {
                 this.wabbit.body.velocity.y = -1 * this.jumpSpeed * 2;
             }
         },
         blinkJump: function () {
-            if (neurosky.blink > 30) {
+            if (neurosky.blink > 30 && this.wabbit.body.onFloor()) {
                 this.wabbit.body.velocity.y = -1 * this.jumpSpeed * 2;
+                neurosky.blink = 0;
             }
         },
         attentionFly: function () {
