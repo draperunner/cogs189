@@ -34,9 +34,6 @@ var playState = {
         this.horizontalSpeed = 300;
         this.jumpSpeed = 100;
 
-        // Settings for neurosky
-        this.flyThreshold = 30;
-
         // Create burgers
         this.burgers = game.add.group();
         this.burgers.enableBody = true;

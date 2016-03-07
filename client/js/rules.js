@@ -24,13 +24,19 @@ rules = {
             }
         },
         attentionFly: function () {
-            if (neurosky.attention > this.flyThreshold) {
+            if (neurosky.attention > 40) {
                 this.wabbit.body.velocity.y = -1 * this.jumpSpeed;
+            }
+        },
+        blinkFall: function () {
+            if (neurosky.blink > 30) {
+                this.wabbit.body.velocity.y = this.jumpSpeed;
             }
         },
         moveAndFly: function () {
             rules.methods.classicHorizontalMove.bind(this)();
             rules.methods.attentionFly.bind(this)();
+            rules.methods.blinkFall.bind(this)();
         },
         godModeMove: function () {
             // Horizontal movement
