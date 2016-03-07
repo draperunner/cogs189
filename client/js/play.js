@@ -131,5 +131,15 @@ var playState = {
         this.debugMeditation.setText('M: ' + neurosky.meditation);
         this.debugBlink.setText('B: ' + neurosky.blink);
         this.debugPoorSignalLevel.setText('S: ' + neurosky.poorSignalLevel);
+    },
+
+    // Returns true if the wabbit is touching a movableObject (elevator or stone)
+    wabbitIsStandingOnMovable: function () {
+        const movable = this.movables.getTop();
+        if (!movable) return false;
+        const boundsA = movable.getBounds();
+        const boundsB = this.wabbit.getBounds();
+        const wabbitBottom = new Phaser.Rectangle(boundsB.bottomLeft.x, boundsB.bottomLeft.y, boundsB.width, 1);
+        return Phaser.Rectangle.intersects(boundsA, wabbitBottom);
     }
 };

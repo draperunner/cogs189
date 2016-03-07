@@ -13,7 +13,7 @@ rules = {
             }
         },
         classicJump: function () {
-            if (this.cursor.up.isDown && this.wabbit.body.onFloor()) {
+            if (this.cursor.up.isDown && (this.wabbit.body.onFloor() || this.wabbitIsStandingOnMovable())) {
                 this.wabbit.body.velocity.y = -1 * this.jumpSpeed * 2;
             }
         },
