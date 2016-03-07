@@ -102,7 +102,7 @@ rules = {
         movableObject: 'elevator',
         moveMovable: function () {
             if (this.movables.children.length === 0) return;
-            var target = 4 * neurosky.attention + 110;
+            var target = 510 - 4 * neurosky.attention;
             var elevator = this.movables.getTop();
             var distance = target - elevator.y;
             elevator.body.velocity.y = (Math.abs(distance) < 5) ? 0 : Math.sign(distance) * 30;

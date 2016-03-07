@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="20" tileheight="20" backgroundcolor="#029aff" nextobjectid="12">
- <tileset firstgid="1" name="tileset" tilewidth="20" tileheight="20" tilecount="45" columns="15">
+ <tileset firstgid="1" name="tileset" tilewidth="20" tileheight="20">
   <image source="../assets/finalTileset.png" width="300" height="60"/>
  </tileset>
  <layer name="Tile Layer 1" width="40" height="30">
@@ -39,7 +39,7 @@
  </layer>
  <objectgroup name="Object Layer 1">
   <object id="9" gid="21" x="620" y="520" width="20" height="20"/>
-  <object id="10" gid="23" x="100" y="540" width="20" height="20"/>
+  <object id="10" gid="23" x="100" y="140" width="20" height="20"/>
   <object id="11" gid="22" x="660" y="120" width="20" height="20"/>
  </objectgroup>
 </map>
