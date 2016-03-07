@@ -19,7 +19,7 @@ rules = {
         },
         blinkJump: function () {
             if (neurosky.blink > 30 && this.wabbit.body.onFloor()) {
-                this.wabbit.body.velocity.y = -1 * this.jumpSpeed * 2;
+                this.wabbit.body.velocity.y = -1 * this.jumpSpeed * 4;
                 neurosky.blink = 0;
             }
         },
