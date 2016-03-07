@@ -78,6 +78,9 @@ var playState = {
         if (this.r.isDown) {
             this.reset();
         }
+
+        rules.get(game.global.level, 'moveMovable').bind(this)();
+
         this.updateDebugTexts();
         if (game.global.debug) {
             rules.methods.godModeMove.bind(this)();
@@ -85,7 +88,6 @@ var playState = {
         }
         rules.get(game.global.level, 'move').bind(this)();
         rules.get(game.global.level, 'jump').bind(this)();
-        rules.get(game.global.level, 'moveMovable').bind(this)();
     },
 
     reset: function() {
