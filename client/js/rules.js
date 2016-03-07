@@ -79,7 +79,9 @@ rules = {
             var target = 180 - neurosky.attention * 2;
             var distance = target - stone.y;
 
-            if (Math.sign(distance) === 1) {
+            if (Math.abs(distance) < 5) {
+                stone.body.velocity.y = 0;
+            } else if (Math.sign(distance) === 1) {
                 stone.body.velocity.y = 60;
             } else {
                 stone.body.velocity.y = Math.sign(distance) * 30;
