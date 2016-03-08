@@ -17,13 +17,14 @@ var playState = {
             this.debugPoorSignalLevel.visible = !this.debugPoorSignalLevel.visible;
         }, this);
 
-
         // Level
         this.createWorld();
 
         // Wabbit
         var result = this.findObjectsByGID(21, this.map, 'Object Layer 1');
-        this.wabbit = game.add.sprite(result[0].x, result[0].y, 'wabbit');
+        this.originalX = result[0].x;
+        this.originalY = result[0].y;
+        this.wabbit = game.add.sprite(this.originalX, this.originalY, 'wabbit');
 
         this.wabbit.anchor.setTo(0.5, 1);
         game.physics.arcade.enable(this.wabbit);
@@ -63,6 +64,26 @@ var playState = {
         this.debugMeditation = game.add.text(10, 30, 'M: ' + neurosky.meditation, { font: '18px Arial', fill: '#ffffff' });
         this.debugBlink = game.add.text(10, 50, 'B: ' + neurosky.blink, { font: '18px Arial', fill: '#ffffff' });
         this.debugPoorSignalLevel = game.add.text(10, 70, 'S: ' + neurosky.poorSignalLevel, { font: '18px Arial', fill: '#ffffff' });
+
+        // Sprite used to flash screen when blinking
+        this.whiteFlash = this.game.add.sprite(0, 0, 'whiteFlash');
+        this.whiteFlash.alpha = 0;
+        this.whiteFlash.flash = function () {
+            var t = game.add.tween(this).to({alpha:1}, 50).start();
+            t.onComplete.add(function () {
+                game.add.tween(this).to({alpha:0}, 100).start();
+            }, this);
+        };
+
+        // Sprite used to flash screen when killed. Resets game when done!
+        this.redFlash = this.game.add.sprite(0, 0, 'redFlash');
+        this.redFlash.alpha = 0;
+        this.redFlash.flash = function () {
+            var t = game.add.tween(this).to({alpha:1}, 50).start();
+            t.onComplete.add(function () {
+                game.add.tween(this).to({alpha:0}, 500).start();
+            }, this);
+        };
     },
 
     update: function() {
@@ -89,7 +110,8 @@ var playState = {
 
     reset: function() {
         game.global.deaths += 1;
-        game.state.start('play');
+        this.redFlash.flash();
+        this.wabbit.reset(this.originalX, this.originalY);
     },
 
     eatBurger: function(wabbit, burger) {
@@ -98,7 +120,11 @@ var playState = {
         if (this.numberOfBurgers > 0) { return; }
         if (game.global.level < game.global.numLevels) {
             game.global.level += 1;
-            game.state.start('play');
+            this.wabbit.anchor.setTo(0.5, 0.5);
+            this.wabbit.y -= this.wabbit.height / 2;
+            game.add.tween(this.wabbit).to({angle:360, y:this.wabbit.y-60}, 400).start().onComplete.add(function () {
+                game.state.start('play');
+            });
         }
         else {
             game.global.level = 1;
