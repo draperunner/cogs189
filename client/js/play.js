@@ -3,6 +3,7 @@ var playState = {
     create: function() {
 
         game.physics.startSystem(Phaser.Physics.ARCADE);
+        this.gameOver = false;
 
         // Keyboard
         this.cursor = game.input.keyboard.createCursorKeys();
@@ -25,8 +26,14 @@ var playState = {
         this.originalX = result[0].x;
         this.originalY = result[0].y;
         this.player = game.add.sprite(this.originalX, this.originalY, 'player');
-
         this.player.anchor.setTo(0.5, 1);
+        this.player.animations.add('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
+        this.player.animations.add('run', [9, 10, 11, 12, 13, 14, 15, 16, 17, 18], 20, true);
+        this.player.animations.add('fly', [20, 21, 22, 23, 22, 21], 5, true);
+        this.player.animations.add('hooray', [30, 31, 32, 33, 34, 34, 34, 34], 10);
+
+        this.player.animations.play('idle');
+
         game.physics.arcade.enable(this.player);
 
         this.player.body.gravity.y = (!game.global.debug) ? 500 : 0;
@@ -91,12 +98,12 @@ var playState = {
         game.physics.arcade.collide(this.player, this.movables);
         game.physics.arcade.collide(this.layer, this.movables);
         game.physics.arcade.overlap(this.player, this.burgers, this.eatBurger, null, this);
+
+        if (this.r.isDown) this.reset();
+        if (this.gameOver) return;
+
         rules.get(game.global.level, 'overlapMovable').bind(this)();
-
-        if (this.r.isDown) {
-            this.reset();
-        }
-
+        rules.get(game.global.level, 'doAnimations').bind(this)();
         rules.get(game.global.level, 'moveMovable').bind(this)();
 
         this.updateDebugTexts();
@@ -117,14 +124,14 @@ var playState = {
     eatBurger: function(player, burger) {
         burger.kill();
         this.numberOfBurgers -= 1 ;
-        if (this.numberOfBurgers > 0) { return; }
+        if (this.numberOfBurgers > 0) return;
+        this.gameOver = true;
+        this.player.body.velocity.x /= 10;
         if (game.global.level < game.global.numLevels) {
             game.global.level += 1;
-            this.player.anchor.setTo(0.5, 0.5);
-            this.player.y -= this.player.height / 2;
-            game.add.tween(this.player).to({angle:360, y:this.player.y-60}, 400).start().onComplete.add(function () {
+            this.player.animations.play('hooray').onComplete.add(function () {
                 game.state.start('play');
-            });
+            }, this);
         }
         else {
             game.global.level = 1;

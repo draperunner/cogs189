@@ -49,6 +49,19 @@ rules = {
             } else {
                 this.player.body.velocity.y = 0;
             }
+        },
+        defaultDoAnimations: function () {
+            // Set scale based on horizontal velocity. Avoid setting scale to 0.
+            const dir = Math.sign(this.player.body.velocity.x);
+            if (dir != 0) this.player.scale.x = dir;
+            // Play appropriate animation
+            const onFloor = this.player.body.onFloor();
+            const onMovable = this.playerIsStandingOnMovable();
+            if (onFloor || onMovable) {
+                this.player.animations.play(dir === 0 ? 'idle' : 'run');
+            } else if (!onFloor && !onMovable) {
+                this.player.animations.play('fly');
+            }
         }
     },
 
@@ -58,7 +71,8 @@ rules = {
         jump: function () { rules.methods.classicJump.bind(this)(); },
         movableObject: '',
         moveMovable: function () {},
-        overlapMovable: function () {}
+        overlapMovable: function () {},
+        doAnimations: function () { rules.methods.defaultDoAnimations.bind(this)(); }
     },
 
     // Function that returns requested property for given level. If it doesn't exist, the default is used.

@@ -12,7 +12,7 @@ var loadState = {
 
         // Load all assets
         game.load.spritesheet('mute', 'assets/muteButton.png', 28, 22);
-        game.load.image('player', 'assets/player.png');
+        game.load.spritesheet('player', 'assets/player.png', 30, 35);
         game.load.image('burger', 'assets/burger.png');
         game.load.image('elevator', 'assets/elevator.png');
         game.load.image('stone', 'assets/stone.png');
