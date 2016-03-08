@@ -31,6 +31,7 @@ rules = {
         blinkFall: function () {
             if (neurosky.blink > 30) {
                 this.player.body.velocity.y = this.jumpSpeed;
+                neurosky.blink = 0;
             }
         },
         moveAndFly: function () {
