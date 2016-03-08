@@ -34,8 +34,6 @@ if ("WebSocket" in window) {
     if (data.blinkStrength) {
       neurosky.blink = data.blinkStrength;
       //console.log('[blink] ' + neurosky.blink);
-    } else {
-      neurosky.blink = 0;
     }
 
     // handle "poorSignal" data
