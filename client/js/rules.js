@@ -73,7 +73,8 @@ rules = {
         movableObject: '',
         moveMovable: function () {},
         overlapMovable: function () {},
-        doAnimations: function () { rules.methods.defaultDoAnimations.bind(this)(); }
+        doAnimations: function () { rules.methods.defaultDoAnimations.bind(this)(); },
+        drawInstructions: function () {}
     },
 
     // Function that returns requested property for given level. If it doesn't exist, the default is used.
@@ -85,7 +86,17 @@ rules = {
     },
 
     // (Optional) Specific configuration for each level follows. Object name must start with 'lvl' followed by number of level.
+    lvl1: {
+        drawInstructions: function () {
+            game.add.text(game.world.centerX, 200, 'Pay attention, and you will fly. Blink, and you will fall', game.global.instructionsStyle)
+                .anchor.set(0.5);
+        }
+    },
     lvl2: {
+        drawInstructions: function () {
+            game.add.text(game.world.centerX, game.world.height - 30, 'Only attention lifts the stone', game.global.instructionsStyle)
+                .anchor.set(0.5);
+        },
         move: function () { rules.methods.classicHorizontalMove.bind(this)(); },
         movableObject: 'stone',
         moveMovable: function () {
@@ -113,6 +124,10 @@ rules = {
         }
     },
     lvl3: {
+        drawInstructions: function () {
+            game.add.text(game.world.centerX + 80, game.world.height - 30, 'Move the elevator with attention', game.global.instructionsStyle)
+                .anchor.set(0.5);
+        },
         move: function () { rules.methods.classicHorizontalMove.bind(this)(); },
         movableObject: 'elevator',
         moveMovable: function () {
@@ -123,8 +138,43 @@ rules = {
             elevator.body.velocity.y = (Math.abs(distance) < 5) ? 0 : Math.sign(distance) * 30;
         }
     },
+    lvl4: {
+        drawInstructions: function () {
+            game.add.text(game.world.centerX, 60, 'Attention = flying, blinking = falling', game.global.instructionsStyle)
+                .anchor.set(0.5);
+        }
+    },
+    lvl5: {
+        drawInstructions: function () {
+            game.add.text(game.world.centerX, 60, 'Same thing as last level', game.global.instructionsStyle)
+                .anchor.set(0.5);
+        }
+    },
+    lvl6: {
+        drawInstructions: function () {
+            game.add.text(80, 80, 'Attention is flying, blinking dropping. Still.', game.global.instructionsStyle);
+        }
+    },
     lvl7: {
+        drawInstructions: function () {
+            game.add.text(game.world.centerX, game.world.height - 40, 'Blink to jump!', game.global.instructionsStyle)
+                .anchor.set(0.5);
+        },
         move: function () { rules.methods.classicHorizontalMove.bind(this)(); },
         jump: function () { rules.methods.blinkJump.bind(this)(); }
+    },
+    lvl8: {
+        drawInstructions: function () {
+            game.add.text(game.world.centerX + 200, 100, 'Attention is flying again', game.global.instructionsStyle)
+                .anchor.set(0.5);
+            game.add.text(game.world.centerX + 200, 150, 'Drop with blink', game.global.instructionsStyle)
+                .anchor.set(0.5);
+        }
+    },
+    lvl9: {
+        drawInstructions: function () {
+            game.add.text(game.world.centerX, game.world.height - 40, 'Attention for flying, blink for dropping', game.global.instructionsStyle)
+                .anchor.set(0.5);
+        }
     }
 };

@@ -8,7 +8,8 @@ game.global = {
     resets: 0,
     level: 1,
     numLevels: 11,
-    debug: true
+    debug: true,
+    instructionsStyle: { font: '30px Arial', fill: '#ffffff' }
 };
 
 // Define states

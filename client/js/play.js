@@ -72,6 +72,9 @@ var playState = {
         this.debugBlink = game.add.text(10, 50, 'B: ' + neurosky.blink, { font: '18px Arial', fill: '#ffffff' });
         this.debugPoorSignalLevel = game.add.text(10, 70, 'S: ' + neurosky.poorSignalLevel, { font: '18px Arial', fill: '#ffffff' });
 
+        // Draw instruction texts
+        rules.get(game.global.level, 'drawInstructions').bind(this)();
+
         // Sprite used to flash screen when blinking
         this.whiteFlash = this.game.add.sprite(0, 0, 'whiteFlash');
         this.whiteFlash.alpha = 0;
