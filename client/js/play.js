@@ -24,13 +24,13 @@ var playState = {
         var result = this.findObjectsByGID(21, this.map, 'Object Layer 1');
         this.originalX = result[0].x;
         this.originalY = result[0].y;
-        this.wabbit = game.add.sprite(this.originalX, this.originalY, 'wabbit');
+        this.player = game.add.sprite(this.originalX, this.originalY, 'player');
 
-        this.wabbit.anchor.setTo(0.5, 1);
-        game.physics.arcade.enable(this.wabbit);
+        this.player.anchor.setTo(0.5, 1);
+        game.physics.arcade.enable(this.player);
 
-        this.wabbit.body.gravity.y = (!game.global.debug) ? 500 : 0;
-        this.wabbit.body.collideWorldBounds = true;
+        this.player.body.gravity.y = (!game.global.debug) ? 500 : 0;
+        this.player.body.collideWorldBounds = true;
 
         this.horizontalSpeed = 300;
         this.jumpSpeed = 100;
@@ -87,10 +87,10 @@ var playState = {
     },
 
     update: function() {
-        game.physics.arcade.collide(this.wabbit, this.layer);
-        game.physics.arcade.collide(this.wabbit, this.movables);
+        game.physics.arcade.collide(this.player, this.layer);
+        game.physics.arcade.collide(this.player, this.movables);
         game.physics.arcade.collide(this.layer, this.movables);
-        game.physics.arcade.overlap(this.wabbit, this.burgers, this.eatBurger, null, this);
+        game.physics.arcade.overlap(this.player, this.burgers, this.eatBurger, null, this);
         rules.get(game.global.level, 'overlapMovable').bind(this)();
 
         if (this.r.isDown) {
@@ -111,18 +111,18 @@ var playState = {
     reset: function() {
         game.global.deaths += 1;
         this.redFlash.flash();
-        this.wabbit.reset(this.originalX, this.originalY);
+        this.player.reset(this.originalX, this.originalY);
     },
 
-    eatBurger: function(wabbit, burger) {
+    eatBurger: function(player, burger) {
         burger.kill();
         this.numberOfBurgers -= 1 ;
         if (this.numberOfBurgers > 0) { return; }
         if (game.global.level < game.global.numLevels) {
             game.global.level += 1;
-            this.wabbit.anchor.setTo(0.5, 0.5);
-            this.wabbit.y -= this.wabbit.height / 2;
-            game.add.tween(this.wabbit).to({angle:360, y:this.wabbit.y-60}, 400).start().onComplete.add(function () {
+            this.player.anchor.setTo(0.5, 0.5);
+            this.player.y -= this.player.height / 2;
+            game.add.tween(this.player).to({angle:360, y:this.player.y-60}, 400).start().onComplete.add(function () {
                 game.state.start('play');
             });
         }
@@ -159,13 +159,13 @@ var playState = {
         this.debugPoorSignalLevel.setText('S: ' + neurosky.poorSignalLevel);
     },
 
-    // Returns true if the wabbit is touching a movableObject (elevator or stone)
-    wabbitIsStandingOnMovable: function () {
+    // Returns true if the player is touching a movableObject (elevator or stone)
+    playerIsStandingOnMovable: function () {
         const movable = this.movables.getTop();
         if (!movable) return false;
         const boundsA = movable.getBounds();
-        const boundsB = this.wabbit.getBounds();
-        const wabbitBottom = new Phaser.Rectangle(boundsB.bottomLeft.x, boundsB.bottomLeft.y, boundsB.width, 1);
-        return Phaser.Rectangle.intersects(boundsA, wabbitBottom);
+        const boundsB = this.player.getBounds();
+        const playerBottom = new Phaser.Rectangle(boundsB.bottomLeft.x, boundsB.bottomLeft.y, boundsB.width, 1);
+        return Phaser.Rectangle.intersects(boundsA, playerBottom);
     }
 };

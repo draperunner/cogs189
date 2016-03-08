@@ -5,32 +5,32 @@ rules = {
         classicHorizontalMove: function () {
             // Horizontal movement
             if (this.cursor.left.isDown) {
-                this.wabbit.body.velocity.x = -1 * this.horizontalSpeed;
+                this.player.body.velocity.x = -1 * this.horizontalSpeed;
             } else if (this.cursor.right.isDown) {
-                this.wabbit.body.velocity.x = this.horizontalSpeed;
+                this.player.body.velocity.x = this.horizontalSpeed;
             } else {
-                this.wabbit.body.velocity.x = 0;
+                this.player.body.velocity.x = 0;
             }
         },
         classicJump: function () {
-            if (this.cursor.up.isDown && (this.wabbit.body.onFloor() || this.wabbitIsStandingOnMovable())) {
-                this.wabbit.body.velocity.y = -1 * this.jumpSpeed * 2;
+            if (this.cursor.up.isDown && (this.player.body.onFloor() || this.playerIsStandingOnMovable())) {
+                this.player.body.velocity.y = -1 * this.jumpSpeed * 2;
             }
         },
         blinkJump: function () {
-            if (neurosky.blink > 30 && this.wabbit.body.onFloor()) {
-                this.wabbit.body.velocity.y = -1 * this.jumpSpeed * 4;
+            if (neurosky.blink > 30 && this.player.body.onFloor()) {
+                this.player.body.velocity.y = -1 * this.jumpSpeed * 4;
                 neurosky.blink = 0;
             }
         },
         attentionFly: function () {
             if (neurosky.attention > 40) {
-                this.wabbit.body.velocity.y = -1 * this.jumpSpeed;
+                this.player.body.velocity.y = -1 * this.jumpSpeed;
             }
         },
         blinkFall: function () {
             if (neurosky.blink > 30) {
-                this.wabbit.body.velocity.y = this.jumpSpeed;
+                this.player.body.velocity.y = this.jumpSpeed;
             }
         },
         moveAndFly: function () {
@@ -43,11 +43,11 @@ rules = {
             rules.methods.classicHorizontalMove.bind(this)();
             // Vertical movement
             if (this.cursor.up.isDown) {
-                this.wabbit.body.velocity.y = -2 * this.jumpSpeed;
+                this.player.body.velocity.y = -2 * this.jumpSpeed;
             } else if (this.cursor.down.isDown) {
-                this.wabbit.body.velocity.y = 2 * this.jumpSpeed;
+                this.player.body.velocity.y = 2 * this.jumpSpeed;
             } else {
-                this.wabbit.body.velocity.y = 0;
+                this.player.body.velocity.y = 0;
             }
         }
     },
@@ -91,8 +91,8 @@ rules = {
             const stone = this.movables.getTop();
             if (!stone || stone.body.velocity.y <= 0) return;
             var boundsA = stone.getBounds();
-            var boundsB = this.wabbit.getBounds();
-            if (Phaser.Rectangle.intersects(boundsA, boundsB) && this.wabbit.body.onFloor()) {
+            var boundsB = this.player.getBounds();
+            if (Phaser.Rectangle.intersects(boundsA, boundsB) && this.player.body.onFloor()) {
                 this.reset();
             }
         }
