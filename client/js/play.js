@@ -3,26 +3,21 @@ var playState = {
     create: function() {
 
         game.physics.startSystem(Phaser.Physics.ARCADE);
-        this.gameOver = false;
 
         // Keyboard
         this.cursor = game.input.keyboard.createCursorKeys();
         this.r = game.input.keyboard.addKey(Phaser.Keyboard.R);
         this.d = game.input.keyboard.addKey(Phaser.Keyboard.D);
 
+        // Reset game when r is pressed
+        this.r.onDown.add(this.reset, this);
+
         // Toggle Neurosky debug texts when d key is pressed
-        this.toggleNeuroskyTexts = function () {
-            this.debugAttention.visible = !this.debugAttention.visible;
-            this.debugMeditation.visible = !this.debugMeditation.visible;
-            this.debugBlink.visible = !this.debugBlink.visible;
-            this.debugPoorSignalLevel.visible = !this.debugPoorSignalLevel.visible;
-        };
         this.d.onDown.add(this.toggleNeuroskyTexts, this);
 
         // Level
         this.createWorld();
-
-
+        this.gameOver = false;
         this.horizontalSpeed = 300;
         this.jumpSpeed = 100;
 
@@ -51,15 +46,16 @@ var playState = {
         }, this);
 
         // Neurosky debug texts
-        this.debugAttention = game.add.text(10, 40, 'A: ' + neurosky.attention, { font: '18px Arial', fill: '#ffffff' });
-        this.debugMeditation = game.add.text(10, 60, 'M: ' + neurosky.meditation, { font: '18px Arial', fill: '#ffffff' });
-        this.debugBlink = game.add.text(10, 80, 'B: ' + neurosky.blink, { font: '18px Arial', fill: '#ffffff' });
-        this.debugPoorSignalLevel = game.add.text(10, 100, 'S: ' + neurosky.poorSignalLevel, { font: '18px Arial', fill: '#ffffff' });
+        this.neuroskyTextsEnabled = true;
+        const style = { font: '18px Arial', fill: '#ffffff' };
+        this.debugAttention = game.add.text(10, 40, 'A: 0', style);
+        this.debugMeditation = game.add.text(10, 60, 'M: 0', style);
+        this.debugBlink = game.add.text(10, 80, 'B: 0', style);
+        this.debugPoorSignalLevel = game.add.text(10, 100, 'S: 0', style);
         this.toggleNeuroskyTexts(); // Hide by default
 
         // Draw instruction texts
         rules.get('drawInstructions').bind(this)();
-
 
         // Mind Power Bar representing neurosky value
         this.mindPowerBar = game.add.sprite(10, 10, 'mindPowerBar');
@@ -108,7 +104,6 @@ var playState = {
         game.physics.arcade.collide(this.player, this.movables);
         game.physics.arcade.overlap(this.player, this.burgers, this.eatBurger, null, this);
 
-        if (this.r.isDown) this.reset();
         if (this.gameOver) return;
 
         rules.get('overlapMovable').bind(this)();
@@ -116,7 +111,7 @@ var playState = {
         rules.get('moveMovable').bind(this)();
         rules.get('updateMindPowerBar').bind(this)();
 
-        this.updateDebugTexts();
+        if (this.neuroskyTextsEnabled) this.updateDebugTexts();
         if (game.global.debug) {
             rules.methods.godModeMove.bind(this)();
             return;
@@ -184,5 +179,13 @@ var playState = {
         const boundsB = this.player.getBounds();
         const playerBottom = new Phaser.Rectangle(boundsB.bottomLeft.x, boundsB.bottomLeft.y, boundsB.width, 1);
         return Phaser.Rectangle.intersects(boundsA, playerBottom);
+    },
+
+    toggleNeuroskyTexts: function () {
+        this.neuroskyTextsEnabled = !this.neuroskyTextsEnabled;
+        this.debugAttention.visible = this.neuroskyTextsEnabled;
+        this.debugMeditation.visible = this.neuroskyTextsEnabled;
+        this.debugBlink.visible = this.neuroskyTextsEnabled;
+        this.debugPoorSignalLevel.visible = this.neuroskyTextsEnabled;
     }
 };
