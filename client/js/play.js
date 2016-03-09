@@ -22,23 +22,6 @@ var playState = {
         // Level
         this.createWorld();
 
-        // Wabbit
-        var result = this.findObjectsByGID(21, this.map, 'Object Layer 1');
-        this.originalX = result[0].x;
-        this.originalY = result[0].y;
-        this.player = game.add.sprite(this.originalX, this.originalY, 'player');
-        this.player.anchor.setTo(0.5, 1);
-        this.player.animations.add('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
-        this.player.animations.add('run', [9, 10, 11, 12, 13, 14, 15, 16, 17, 18], 20, true);
-        this.player.animations.add('fly', [20, 21, 22, 23, 22, 21], 5, true);
-        this.player.animations.add('hooray', [30, 31, 32, 33, 34, 34, 34, 34], 10);
-
-        this.player.animations.play('idle');
-
-        game.physics.arcade.enable(this.player);
-
-        this.player.body.gravity.y = (!game.global.debug) ? 500 : 0;
-        this.player.body.collideWorldBounds = true;
 
         this.horizontalSpeed = 300;
         this.jumpSpeed = 100;
@@ -77,6 +60,28 @@ var playState = {
         // Draw instruction texts
         rules.get('drawInstructions').bind(this)();
 
+
+        // Mind Power Bar representing neurosky value
+        this.mindPowerBar = game.add.sprite(10, 10, 'mindPowerBar');
+        this.mindPowerBar.setPercentage = function (percentage) {
+            this.scale.x = percentage * 6 / 100;
+        };
+
+        // Player
+        var result = this.findObjectsByGID(21, this.map, 'Object Layer 1');
+        this.originalX = result[0].x;
+        this.originalY = result[0].y;
+        this.player = game.add.sprite(this.originalX, this.originalY, 'player');
+        this.player.anchor.setTo(0.5, 1);
+        this.player.animations.add('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
+        this.player.animations.add('run', [9, 10, 11, 12, 13, 14, 15, 16, 17, 18], 20, true);
+        this.player.animations.add('fly', [20, 21, 22, 23, 22, 21], 5, true);
+        this.player.animations.add('hooray', [30, 31, 32, 33, 34, 34, 34, 34], 10);
+        this.player.animations.play('idle');
+        game.physics.arcade.enable(this.player);
+        this.player.body.gravity.y = (!game.global.debug) ? 500 : 0;
+        this.player.body.collideWorldBounds = true;
+
         // Sprite used to flash screen when blinking
         this.whiteFlash = this.game.add.sprite(0, 0, 'whiteFlash');
         this.whiteFlash.alpha = 0;
@@ -96,18 +101,11 @@ var playState = {
                 game.add.tween(this).to({alpha:0}, 500).start();
             }, this);
         };
-
-        // Mind Power Bar representing neurosky value
-        this.mindPowerBar = game.add.sprite(10, 10, 'mindPowerBar');
-        this.mindPowerBar.setPercentage = function (percentage) {
-            this.scale.x = percentage * 6 / 100;
-        };
     },
 
     update: function() {
         game.physics.arcade.collide(this.player, this.layer);
         game.physics.arcade.collide(this.player, this.movables);
-        game.physics.arcade.collide(this.layer, this.movables);
         game.physics.arcade.overlap(this.player, this.burgers, this.eatBurger, null, this);
 
         if (this.r.isDown) this.reset();
