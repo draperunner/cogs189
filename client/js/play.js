@@ -187,5 +187,13 @@ var playState = {
         this.debugMeditation.visible = this.neuroskyTextsEnabled;
         this.debugBlink.visible = this.neuroskyTextsEnabled;
         this.debugPoorSignalLevel.visible = this.neuroskyTextsEnabled;
+    },
+
+    distanceToGround: function () {
+        const ray = new Phaser.Line(this.player.x, this.player.y, this.player.x, game.world.height);
+        const tileHits = this.layer.getRayCastTiles(ray, 10, true, true);
+        if (tileHits.length === 0) return game.world.height - this.player.y;
+        return tileHits[0].y * tileHits[0].height - this.player.y;
     }
+
 };
