@@ -63,6 +63,14 @@ rules = {
             } else if (!onFloor && !onMovable) {
                 this.player.animations.play('fly');
             }
+        },
+        // Updates mind power bar according to attention value
+        mindPowerAttention: function () {
+            this.mindPowerBar.setPercentage(neurosky.attention);
+        },
+        // Updates mind power bar according to meditation value
+        mindPowerMeditation: function () {
+            this.mindPowerBar.setPercentage(neurosky.meditation);
         }
     },
 
@@ -74,7 +82,8 @@ rules = {
         moveMovable: function () {},
         overlapMovable: function () {},
         doAnimations: function () { rules.methods.defaultDoAnimations.bind(this)(); },
-        drawInstructions: function () {}
+        drawInstructions: function () {},
+        updateMindPowerBar: function () { rules.methods.mindPowerAttention.bind(this)(); }
     },
 
     // Function that returns requested property for given level. If it doesn't exist, the default is used.

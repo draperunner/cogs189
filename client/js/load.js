@@ -18,6 +18,7 @@ var loadState = {
         game.load.image('stone', 'assets/stone.png');
         game.load.image('whiteFlash', 'assets/white_flash.png');
         game.load.image('redFlash', 'assets/red_flash.png');
+        game.load.image('mindPowerBar', 'assets/progressBar.png');
 
         game.load.image('tileset', 'assets/finalTileset.png');
         game.load.tilemap('lvl1', 'lvl/lvl1.json', null, Phaser.Tilemap.TILED_JSON);

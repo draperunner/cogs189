@@ -67,10 +67,10 @@ var playState = {
         }, this);
 
         // Neurosky debug texts
-        this.debugAttention = game.add.text(10, 10, 'A: ' + neurosky.attention, { font: '18px Arial', fill: '#ffffff' });
-        this.debugMeditation = game.add.text(10, 30, 'M: ' + neurosky.meditation, { font: '18px Arial', fill: '#ffffff' });
-        this.debugBlink = game.add.text(10, 50, 'B: ' + neurosky.blink, { font: '18px Arial', fill: '#ffffff' });
-        this.debugPoorSignalLevel = game.add.text(10, 70, 'S: ' + neurosky.poorSignalLevel, { font: '18px Arial', fill: '#ffffff' });
+        this.debugAttention = game.add.text(10, 40, 'A: ' + neurosky.attention, { font: '18px Arial', fill: '#ffffff' });
+        this.debugMeditation = game.add.text(10, 60, 'M: ' + neurosky.meditation, { font: '18px Arial', fill: '#ffffff' });
+        this.debugBlink = game.add.text(10, 80, 'B: ' + neurosky.blink, { font: '18px Arial', fill: '#ffffff' });
+        this.debugPoorSignalLevel = game.add.text(10, 100, 'S: ' + neurosky.poorSignalLevel, { font: '18px Arial', fill: '#ffffff' });
 
         // Draw instruction texts
         rules.get(game.global.level, 'drawInstructions').bind(this)();
@@ -94,6 +94,12 @@ var playState = {
                 game.add.tween(this).to({alpha:0}, 500).start();
             }, this);
         };
+
+        // Mind Power Bar representing neurosky value
+        this.mindPowerBar = game.add.sprite(10, 10, 'mindPowerBar');
+        this.mindPowerBar.setPercentage = function (percentage) {
+            this.scale.x = percentage * 6 / 100;
+        };
     },
 
     update: function() {
@@ -108,6 +114,7 @@ var playState = {
         rules.get(game.global.level, 'overlapMovable').bind(this)();
         rules.get(game.global.level, 'doAnimations').bind(this)();
         rules.get(game.global.level, 'moveMovable').bind(this)();
+        rules.get(game.global.level, 'updateMindPowerBar').bind(this)();
 
         this.updateDebugTexts();
         if (game.global.debug) {
