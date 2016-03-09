@@ -55,7 +55,7 @@ var playState = {
         // Movable objects (elevator, stone, etc.)
         this.movables = game.add.group();
         this.movables.enableBody = true;
-        var img = rules.get(game.global.level, 'movableObject');
+        var img = rules.get('movableObject');
         this.map.createFromObjects('Object Layer 1', 23, img, 0, true, false, this.movables);
         this.movables.forEach(function(movable) {
             if (img === 'stone') {
@@ -73,7 +73,7 @@ var playState = {
         this.debugPoorSignalLevel = game.add.text(10, 100, 'S: ' + neurosky.poorSignalLevel, { font: '18px Arial', fill: '#ffffff' });
 
         // Draw instruction texts
-        rules.get(game.global.level, 'drawInstructions').bind(this)();
+        rules.get('drawInstructions').bind(this)();
 
         // Sprite used to flash screen when blinking
         this.whiteFlash = this.game.add.sprite(0, 0, 'whiteFlash');
@@ -111,18 +111,18 @@ var playState = {
         if (this.r.isDown) this.reset();
         if (this.gameOver) return;
 
-        rules.get(game.global.level, 'overlapMovable').bind(this)();
-        rules.get(game.global.level, 'doAnimations').bind(this)();
-        rules.get(game.global.level, 'moveMovable').bind(this)();
-        rules.get(game.global.level, 'updateMindPowerBar').bind(this)();
+        rules.get('overlapMovable').bind(this)();
+        rules.get('doAnimations').bind(this)();
+        rules.get('moveMovable').bind(this)();
+        rules.get('updateMindPowerBar').bind(this)();
 
         this.updateDebugTexts();
         if (game.global.debug) {
             rules.methods.godModeMove.bind(this)();
             return;
         }
-        rules.get(game.global.level, 'move').bind(this)();
-        rules.get(game.global.level, 'jump').bind(this)();
+        rules.get('move').bind(this)();
+        rules.get('jump').bind(this)();
     },
 
     reset: function() {
@@ -137,7 +137,7 @@ var playState = {
         if (this.numberOfBurgers > 0) return;
         this.gameOver = true;
         this.player.body.velocity.x /= 10;
-        if (game.global.level < game.global.numLevels) {
+        if (game.global.moreLevelsToGo()) {
             game.global.level += 1;
             this.player.animations.play('hooray').onComplete.add(function () {
                 game.state.start('play');
@@ -150,7 +150,7 @@ var playState = {
     },
 
     createWorld: function() {
-        this.map = game.add.tilemap('lvl' + game.global.level);
+        this.map = game.add.tilemap(game.global.nameOfCurrentLevel());
         this.map.addTilesetImage('tileset');
         this.layer = this.map.createLayer('Tile Layer 1');
         this.layer.resizeWorld();

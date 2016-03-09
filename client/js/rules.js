@@ -89,9 +89,10 @@ rules = {
     },
 
     // Function that returns requested property for given level. If it doesn't exist, the default is used.
-    get: function (lvlNumber, propertyName) {
-        if (rules.hasOwnProperty('lvl' + lvlNumber) && rules['lvl' + lvlNumber].hasOwnProperty(propertyName)) {
-            return rules['lvl' + lvlNumber][propertyName];
+    get: function (propertyName) {
+        const level = game.global.nameOfCurrentLevel();
+        if (rules.hasOwnProperty(level) && rules[level].hasOwnProperty(propertyName)) {
+            return rules[level][propertyName];
         }
         return rules.defaults[propertyName];
     },
