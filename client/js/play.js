@@ -10,13 +10,14 @@ var playState = {
         this.r = game.input.keyboard.addKey(Phaser.Keyboard.R);
         this.d = game.input.keyboard.addKey(Phaser.Keyboard.D);
 
-        // Toggle debug mode when d key is pressed
-        this.d.onDown.add(function () {
+        // Toggle Neurosky debug texts when d key is pressed
+        this.toggleNeuroskyTexts = function () {
             this.debugAttention.visible = !this.debugAttention.visible;
             this.debugMeditation.visible = !this.debugMeditation.visible;
             this.debugBlink.visible = !this.debugBlink.visible;
             this.debugPoorSignalLevel.visible = !this.debugPoorSignalLevel.visible;
-        }, this);
+        };
+        this.d.onDown.add(this.toggleNeuroskyTexts, this);
 
         // Level
         this.createWorld();
@@ -71,6 +72,7 @@ var playState = {
         this.debugMeditation = game.add.text(10, 60, 'M: ' + neurosky.meditation, { font: '18px Arial', fill: '#ffffff' });
         this.debugBlink = game.add.text(10, 80, 'B: ' + neurosky.blink, { font: '18px Arial', fill: '#ffffff' });
         this.debugPoorSignalLevel = game.add.text(10, 100, 'S: ' + neurosky.poorSignalLevel, { font: '18px Arial', fill: '#ffffff' });
+        this.toggleNeuroskyTexts(); // Hide by default
 
         // Draw instruction texts
         rules.get('drawInstructions').bind(this)();

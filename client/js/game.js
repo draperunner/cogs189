@@ -10,7 +10,7 @@ game.global = {
     score: 0,
     resets: 0,
     level: 1,
-    debug: true,
+    debug: false,
     instructionsStyle: { font: '30px Arial', fill: '#ffffff' },
     moreLevelsToGo: function () {
         return this.level < game.config.enabledLevels.length;
