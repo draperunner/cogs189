@@ -59,7 +59,7 @@ var playState = {
         this.map.createFromObjects('Object Layer 1', 23, img, 0, true, false, this.movables);
         this.movables.forEach(function(movable) {
             if (img === 'stone') {
-                movable.anchor.x = 0.5;
+                movable.anchor.setTo(0.5, 1);
             }
             movable.body.immovable = true;
             movable.body.allowGravity = false;

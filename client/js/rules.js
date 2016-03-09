@@ -105,7 +105,7 @@ rules = {
     },
     lvl2: {
         drawInstructions: function () {
-            game.add.text(game.world.centerX, game.world.height - 30, 'Only attention lifts the stone', game.global.instructionsStyle)
+            game.add.text(game.world.centerX, game.world.height - 30, 'Only meditation lifts the stone', game.global.instructionsStyle)
                 .anchor.set(0.5);
         },
         move: function () { rules.methods.classicHorizontalMove.bind(this)(); },
@@ -113,7 +113,7 @@ rules = {
         moveMovable: function () {
             if (this.movables.children.length === 0) return;
             var stone = this.movables.getTop();
-            var target = 180 - neurosky.attention * 2;
+            var target = 310 - 1.5 * neurosky.meditation;
             var distance = target - stone.y;
 
             if (Math.abs(distance) < 5) {
@@ -132,7 +132,8 @@ rules = {
             if (Phaser.Rectangle.intersects(boundsA, boundsB) && this.player.body.onFloor()) {
                 this.reset();
             }
-        }
+        },
+        updateMindPowerBar: function () { rules.methods.mindPowerMeditation.bind(this)(); }
     },
     lvl3: {
         drawInstructions: function () {
