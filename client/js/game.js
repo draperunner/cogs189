@@ -2,7 +2,7 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'gameDiv');
 
 // Enabled levels as 1-indexed integers
-game.config.enabledLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+game.config.enabledLevels = [1, 2, 3, 5, 6, 7, 8];
 
 // Our 'global' variable
 game.global = {

@@ -162,7 +162,7 @@ rules = {
     },
     lvl5: {
         drawInstructions: function () {
-            game.add.text(game.world.centerX, 60, 'Same thing as last level', game.global.instructionsStyle)
+            game.add.text(game.world.centerX, 60, 'Attention for flying, blink for dropping', game.global.instructionsStyle)
                 .anchor.set(0.5);
         }
     },
