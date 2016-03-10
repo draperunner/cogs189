@@ -19,8 +19,7 @@ rules = {
         },
         blinkJump: function () {
             if (neurosky.blink > 30 && this.player.body.onFloor()) {
-                const d = this.distanceToGround();
-                this.player.y += (d < 50) ? d : 50;
+                this.player.body.velocity.y = -4 * this.jumpSpeed;
                 this.whiteFlash.flash();
                 neurosky.blink = 0;
             }
@@ -32,7 +31,8 @@ rules = {
         },
         blinkFall: function () {
             if (neurosky.blink > 30) {
-                this.player.body.velocity.y = this.jumpSpeed;
+                const d = this.distanceToGround();
+                if (d > 60) this.player.y += 50;
                 this.whiteFlash.flash();
                 neurosky.blink = 0;
             }

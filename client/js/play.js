@@ -190,6 +190,7 @@ var playState = {
     },
 
     distanceToGround: function () {
+        if (this.player.body.onFloor() || this.playerIsStandingOnMovable()) return 0;
         const ray = new Phaser.Line(this.player.x, this.player.y, this.player.x, game.world.height);
         const tileHits = this.layer.getRayCastTiles(ray, 10, true, true);
         if (tileHits.length === 0) return game.world.height - this.player.y;
