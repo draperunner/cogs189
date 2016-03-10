@@ -10,9 +10,11 @@ var loadState = {
         progressBar.anchor.setTo(0.5, 0.5);
         game.load.setPreloadSprite(progressBar);
 
+        // Player character. Credits to Darklink990 (http://darklink990.deviantart.com/art/Basic-Human-Sprites-97396818)
+        game.load.spritesheet('player', 'assets/player.png', 30, 35);
+
         // Load all assets
         game.load.spritesheet('mute', 'assets/muteButton.png', 28, 22);
-        game.load.spritesheet('player', 'assets/player.png', 30, 35);
         game.load.image('burger', 'assets/burger.png');
         game.load.image('elevator', 'assets/elevator.png');
         game.load.image('stone', 'assets/stone.png');
