@@ -2,7 +2,7 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'gameDiv');
 
 // Enabled levels as 1-indexed integers
-game.config.enabledLevels = [1, 2, 3, 5, 6, 7, 8];
+game.config.enabledLevels = [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 9];
 
 // Our 'global' variable
 game.global = {
@@ -46,10 +46,15 @@ var debug = {
         game.state.start('play');
         console.log('Debug mode off');
     },
-    level: function (n) {
+    // If actual is true, n represents the name of the actual level
+    // If actual is false, n is treated as 1-indexed index of enabledLevels
+    level: function (n, actual) {
         this.on();
-        game.global.level = n;
+        if (!actual && (n > game.config.enabledLevels.length || n < 0)) {
+            console.log(n + " is out of range of enabledLevels array.");
+            return;
+        }
+        game.global.level = actual ? n : game.config.enabledLevels[n - 1];
         game.state.start('play');
-        console.log('Level %i', n)
     }
 };
