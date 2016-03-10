@@ -11,6 +11,11 @@ game.global = {
     resets: 0,
     level: 1,
     debug: false,
+    threshold: {
+        attention: 40,
+        meditation: 40,
+        blink: 30
+    },
     instructionsStyle: { font: '30px Arial', fill: '#ffffff' },
     moreLevelsToGo: function () {
         return this.level < game.config.enabledLevels.length;

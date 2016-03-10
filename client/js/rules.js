@@ -18,19 +18,19 @@ rules = {
             }
         },
         blinkJump: function () {
-            if (neurosky.blink > 30 && this.player.body.onFloor()) {
+            if (neurosky.blink > game.global.threshold.blink  && this.player.body.onFloor()) {
                 this.player.body.velocity.y = -4 * this.jumpSpeed;
                 this.whiteFlash.flash();
                 neurosky.blink = 0;
             }
         },
         attentionFly: function () {
-            if (neurosky.attention > 40) {
+            if (neurosky.attention > game.global.threshold.attention) {
                 this.player.body.velocity.y = -1 * this.jumpSpeed;
             }
         },
         blinkFall: function () {
-            if (neurosky.blink > 30) {
+            if (neurosky.blink > game.global.threshold.blink) {
                 const d = this.distanceToGround();
                 if (d > 60) this.player.y += 50;
                 this.whiteFlash.flash();
@@ -70,10 +70,12 @@ rules = {
         // Updates mind power bar according to attention value
         mindPowerAttention: function () {
             this.mindPowerBar.setPercentage(neurosky.attention);
+            this.mindPowerBar.tint = (neurosky.attention > game.global.threshold.attention) ? 0x00ff00 : 0xffffff;
         },
         // Updates mind power bar according to meditation value
         mindPowerMeditation: function () {
             this.mindPowerBar.setPercentage(neurosky.meditation);
+            this.mindPowerBar.tint = (neurosky.meditation > game.global.threshold.meditation) ? 0x00ff00 : 0xffffff;
         }
     },
 
