@@ -15,7 +15,7 @@ if ("WebSocket" in window) {
   // when WebSocket connection is opened, do this stuff
   ws.onopen = function() {
     console.log('WebSocket connection is opened');
-    ws.send('Browser conntected');
+    ws.send('Browser connected');
     neurosky.connectedNeurosky = true;
   };
 

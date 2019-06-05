@@ -30,6 +30,7 @@ client.on('blink_data', function(data){
 
 client.on('error', function(error) {
 	console.log('[Neurosky] Unable to connect: ', error.code);
+	console.error(error)
 });
 
 // initiate connection
@@ -41,14 +42,19 @@ client.connect();
 var WebSocketServer = require('ws').Server
 var wss = new WebSocketServer({port: 8080});
 
+const clients = []
+
 // broadcast function (broadcasts message to all clients)
 wss.broadcast = function(data) {
-    for(var i in this.clients)
-        this.clients[i].send(JSON.stringify(data));
+	  const msg =  JSON.stringify(data)
+    for (var i in clients) {
+      clients[i].send(msg);
+		}
 };
 
 // bind each connection
 wss.on('connection', function(ws) {
+		clients.push(ws)
     ws.on('message', function(message) {
         console.log('[Websocket][CLIENT] %s', message);
     });

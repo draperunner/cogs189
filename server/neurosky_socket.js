@@ -1,12 +1,12 @@
-var net = require('net'),
-	events = require('events'),
-	util = require('util');
+const net = require('net')
+const EventEmitter = require('events')
+const util = require('util')
 
 var ThinkGearClient = function(opts) {
 	opts || (opts = {});
 
 	this.port = opts.port || 13854;
-	this.host = opts.host || 'localhost';
+	this.host = opts.host || "127.0.0.1";
 
   var enableRawOutput = !!opts.enableRawOutput;
 
@@ -15,10 +15,10 @@ var ThinkGearClient = function(opts) {
 		format: "Json"
 	};
 
-	events.EventEmitter.call(this);
+	EventEmitter.call(this);
 };
 
-util.inherits(ThinkGearClient, events.EventEmitter);
+util.inherits(ThinkGearClient, EventEmitter);
 
 ThinkGearClient.prototype.connect = function() {
 	var self = this;
